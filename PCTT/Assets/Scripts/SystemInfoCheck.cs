@@ -20,6 +20,7 @@ public class SystemInfoCheck : MonoBehaviour {
     public TMP_Text processorCount;
 
     void Start() {
+        Application.targetFrameRate = 120;
         deviceModel.text = "Device model: " + SystemInfo.deviceModel;
         deviceName.text = "Device name: " + SystemInfo.deviceName;
         deviceType.text = "Device type: " + SystemInfo.deviceType.ToString();
