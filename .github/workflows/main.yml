@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Build project
         uses: game-ci/unity-builder@v2
@@ -18,9 +18,29 @@ jobs:
         with:
           targetPlatform: iOS
         
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
-          name: Build
-          path: build
+          name: build-iOS
+          path: build/iOS
+  
+  makeIPA:
+    name: Make IPA
+    runs-on: macos-latest
+    needs: build
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
       
+      - name: Download iOS Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-iOS
+          path: build/iOS
+
+      - name: Cleanup to avoid storage limit
+        if: always()
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: build-iOS
+          
       
