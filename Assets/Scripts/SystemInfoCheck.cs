@@ -18,6 +18,7 @@ public class SystemInfoCheck : MonoBehaviour {
     public TMP_Text operatingSystem;
     public TMP_Text operatingSystemFamily;
     public TMP_Text processorCount;
+    public TMP_Text supportsHDR;
 
     void Start() {
         Application.targetFrameRate = 120;
@@ -36,5 +37,6 @@ public class SystemInfoCheck : MonoBehaviour {
         operatingSystem.text = "Operating system: " + SystemInfo.operatingSystem;
         operatingSystemFamily.text = "Operating system family: " + SystemInfo.operatingSystemFamily.ToString();
         processorCount.text = "Processor count: " + SystemInfo.processorCount.ToString();
+        supportsHDR.text = "Supports HDR: " + (SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.DefaultHDR) ? "True" : "False");
     }
 }
